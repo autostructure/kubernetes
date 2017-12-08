@@ -5,9 +5,9 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-def kubernetes_init(apiserver_advertise_address, apiserver_bind_port, apiserver_cert_extra_sans, cert_dir, config, dry_run, feature_gates,
-                    kubernetes_version, node_name, pod_network_cidr, service_cidr, service_dns_domain, skip_preflight_checks,
-                    skip_token_print, token, token_ttl)
+def kubeadm_init(apiserver_advertise_address, apiserver_bind_port, apiserver_cert_extra_sans, cert_dir, config, dry_run, feature_gates,
+                 kubernetes_version, node_name, pod_network_cidr, service_cidr, service_dns_domain, skip_preflight_checks,
+                 skip_token_print, token, token_ttl)
   cmd_string = "kubeadm init"
   cmd_string << " --apiserver-advertise-address=#{apiserver_advertise_address}" unless apiserver_advertise_address.nil?
   cmd_string << " --apiserver-bind-port=#{apiserver_bind_port}" unless apiserver_bind_port.nil?
@@ -50,9 +50,9 @@ token = params['token']
 token_ttl = params['token_ttl']
 
 begin
-  result = kubernetes_init(apiserver_advertise_address, apiserver_bind_port, apiserver_cert_extra_sans, cert_dir, config, dry_run,
-                           feature_gates, kubernetes_version, node_name, pod_network_cidr, service_cidr, service_dns_domain,
-                           skip_preflight_checks, skip_token_print, token, token_ttl)
+  result = kubeadm_init(apiserver_advertise_address, apiserver_bind_port, apiserver_cert_extra_sans, cert_dir, config, dry_run,
+                        feature_gates, kubernetes_version, node_name, pod_network_cidr, service_cidr, service_dns_domain,
+                        skip_preflight_checks, skip_token_print, token, token_ttl)
   puts result
   exit 0
 rescue Puppet::Error => e

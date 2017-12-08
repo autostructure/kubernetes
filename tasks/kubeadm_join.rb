@@ -5,9 +5,9 @@ require 'json'
 require 'open3'
 require 'puppet'
 
-def kubernetes_join(config, discovery_file, discovery_token, discovery_token_ca_cert_hash, discovery_token_unsafe_skip_ca_verification,
+def kubeadm_join(config, discovery_file, discovery_token, discovery_token_ca_cert_hash, discovery_token_unsafe_skip_ca_verification,
                  node_name, tls_bootstrap_token, token, skip_preflight_checks)
-  cmd_string = "kubernetes join"
+  cmd_string = "kubeadm join"
   cmd_string << " --config=#{config}" unless config.nil?
   cmd_string << " --discovery-file=#{discovery_file}" unless discovery_file.nil?
   cmd_string << " --discovery-token=#{discovery_token}" unless discovery_token.nil?
@@ -35,7 +35,7 @@ token = params['token']
 skip_preflight_checks = params['skip_preflight_checks']
 
 begin
-  result = kubernetes_join(config, discovery_file, discovery_token, discovery_token_ca_cert_hash, discovery_token_unsafe_skip_ca_verification,
+  result = kubeadm_join(config, discovery_file, discovery_token, discovery_token_ca_cert_hash, discovery_token_unsafe_skip_ca_verification,
                         node_name, tls_bootstrap_token, token, skip_preflight_checks)
   puts result
   exit 0
