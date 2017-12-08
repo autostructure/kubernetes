@@ -4,9 +4,9 @@ class kubernetes::config {
   #   ensure => present,
   #   value  => '1',
   # }
-# 
-  # sysctl { 'net.bridge.bridge-nf-call-iptables':
-  #   ensure => present,
-  #   value  => '1',
-  # }
+#
+  sysctl { 'net.bridge.bridge-nf-call-iptables':
+    ensure => present,
+    value  => '1',
+  }
 }

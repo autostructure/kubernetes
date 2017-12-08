@@ -9,6 +9,10 @@ class kubernetes::pre_install {
       subscribe  => Class['Selinux'],
     }
 
+    exec { '/usr/sbin/swapoff -a':
+      unless => $facts['swapoff'],
+    }
+
     yumrepo { 'kubernetes':
       ensure        => 'present',
       baseurl       => 'https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64',
