@@ -1,6 +1,6 @@
 {
   "name": "autostructure-kubernetes",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "autostructure",
   "summary": "Installs a kubernetes master or kubernetes node.",
   "license": "Apache-2.0",
@@ -10,6 +10,10 @@
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    },
+    {
+      "name": "puppetlabs-selinux",
       "version_requirement": ">= 1.0.0"
     }
   ],
