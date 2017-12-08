@@ -9,8 +9,9 @@ class kubernetes::pre_install {
       subscribe  => Class['Selinux'],
     }
 
-    exec { '/usr/sbin/swapoff -a':
-      unless => $facts['swapoff'],
+    # Make sure swap is off
+    unless $facts['swapoff'] {
+      exec { '/usr/sbin/swapoff -a': }
     }
 
     yumrepo { 'kubernetes':
