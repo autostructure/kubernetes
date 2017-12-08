@@ -4,7 +4,7 @@ class kubernetes::install {
     ensure => present,
   }
 
-  package { 'kubernetes':
+  package { 'kubeadm':
     ensure => present,
   }
 
