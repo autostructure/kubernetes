@@ -1,0 +1,17 @@
+{
+  "name": "autostructure-kubernetes",
+  "version": "0.1.0",
+  "author": "autostructure",
+  "summary": "Installs a kubernetes master or kubernetes node.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/autostructure/kubernetes.git",
+  "project_page": "https://github.com/autostructure/kubernetes",
+  "issues_url": "https://github.com/autostructure/kubernetes/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ],
+  "data_provider": null
+}

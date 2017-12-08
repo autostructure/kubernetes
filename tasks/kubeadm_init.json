@@ -1,0 +1,71 @@
+
+{
+  "description": "Initializes kubernetes admin",
+  "input_method": "stdin",
+  "parameters": {
+    "apiserver_advertise_address": {
+      "description": "Address the API Server will advertise to other members of the cluster.",
+      "type": "Optional[String[1]]"
+    },
+    "apiserver_bind_port": {
+      "description": "Port that the API server will bind on.",
+      "type": "Optional[Integer[1]]"
+    },
+    "apiserver_cert_extra_sans": {
+      "description": "Additional hostnames or IP addresses that should be added to the Subject Alternate Name section for the certificate that the API Server will use.",
+      "type": "Optional[String[1]]"
+    },
+    "cert_dir": {
+      "description": "Path where to save and store the certificates.",
+      "type": "Optional[String[1]]"
+    },
+    "config": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[String[1]]"
+    },
+    "dry_run": {
+      "description": "Tells kubernetes to don’t apply any changes; just output what would be done.",
+      "type": "Optional[Boolean[1]]"
+    },
+    "feature_gates": {
+      "description": "Set of key=value pairs that describe feature gates for alpha/experimental features.",
+      "type": "Optional[String[1]]"
+    },
+    "kubernetes_version": {
+      "description": "Kubernetes version to initialise",
+      "type": "Optional[String[1]]"
+    },
+    "node_name": {
+      "description": "Node name.",
+      "type": "Optional[String[1]]"
+    },
+    "pod_network_cidr": {
+      "description": "A subnet range that will be broken down and handed out to each node.",
+      "type": "Optional[String[1]]"
+    },
+    "service_cidr": {
+      "description": "Flag to override the subnet Kubernetes uses to assign services IP addresses. ",
+      "type": "Optional[String[1]]"
+    },
+    "service_dns_domain": {
+      "description": "DNS name suffix.",
+      "type": "Optional[String[1]]"
+    },
+    "skip_preflight_checks": {
+      "description": "Bypass preflight checks.",
+      "type": "Optional[Boolean[1]]"
+    },
+    "skip_token_print": {
+      "description": "Bypass token print.",
+      "type": "Optional[Boolean[1]]"
+    },
+    "token": {
+      "description": "Manually specifiy token.",
+      "type": "Optional[String[1]]"
+    },
+    "token_ttl": {
+      "description": "Expiration time for the token.",
+      "type": "Optional[String[1]]"
+    }
+  }
+}
