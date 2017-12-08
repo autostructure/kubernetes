@@ -10,7 +10,7 @@ Facter.add(:meminfo) do
 
       if val.include?('kB') then val = val.gsub(/\s+kB/, ''); end
 
-      memhash[key.to_s] = val.strip
+      memhash[key.to_s] = val.strip.to_i
     end
 
     memhash
