@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 Facter.add(:meminfo) do
+  confine kernel: :Linux
+
   setcode do
     # Get mem usage
     memhash = {}

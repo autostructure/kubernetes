@@ -1,0 +1,11 @@
+
+{
+  "description": "Creates a user who can run kubectl.",
+  "input_method": "stdin",
+  "parameters": {
+    "kubectl_user": {
+      "description": "User who can run kubectl.",
+      "type": "String[1]"
+    }
+  }
+}

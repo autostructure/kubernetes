@@ -53,7 +53,14 @@ begin
   result = kubeadm_init(apiserver_advertise_address, apiserver_bind_port, apiserver_cert_extra_sans, cert_dir, config, dry_run,
                         feature_gates, kubernetes_version, node_name, pod_network_cidr, service_cidr, service_dns_domain,
                         skip_preflight_checks, skip_token_print, token, token_ttl)
-  puts result
+
+  join_values =
+    {
+      "discovery-token-ca-cert-hash": /sha256:\S+/.match(result),
+      "token": /--token +(?<token>\S+ +\S+)/.match(result)[:token]
+    }
+
+  puts JSON.pretty_generate(join_values)
   exit 0
 rescue Puppet::Error => e
   puts(status: 'failure', error: e.message)
