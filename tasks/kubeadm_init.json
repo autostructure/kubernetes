@@ -25,7 +25,7 @@
     },
     "dry_run": {
       "description": "Tells kubernetes to don’t apply any changes; just output what would be done.",
-      "type": "Optional[Boolean[1]]"
+      "type": "Optional[Boolean]"
     },
     "feature_gates": {
       "description": "Set of key=value pairs that describe feature gates for alpha/experimental features.",
@@ -53,14 +53,14 @@
     },
     "skip_preflight_checks": {
       "description": "Bypass preflight checks.",
-      "type": "Optional[Boolean[1]]"
+      "type": "Optional[Boolean]"
     },
     "skip_token_print": {
       "description": "Bypass token print.",
-      "type": "Optional[Boolean[1]]"
+      "type": "Optional[Boolean]"
     },
     "token": {
-      "description": "Manually specifiy token.",
+      "description": "Manually specify token.",
       "type": "Optional[String[1]]"
     },
     "token_ttl": {

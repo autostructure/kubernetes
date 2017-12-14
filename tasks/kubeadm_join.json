@@ -7,21 +7,21 @@
       "description": "kubernetes specific config file.",
       "type": "Optional[String[1]]"
     },
-    "discovery-file": {
+    "discovery_file": {
       "description": "A local file path or HTTPS URL. The file specified must be a kubeconfig file with nothing but an unnamed cluster entry. This is used to find both the location of the API server to join along with a root CA bundle to use when talking to that server.",
       "type": "Optional[String[1]]"
     },
-    "discovery-token": {
+    "discovery_token": {
       "description": "The discovery token is used along with the address of the API server (as an unnamed argument) to download and verify information about the cluster. The most critical part of the cluster information is the root CA bundle used to verify the identity of the server during subsequent TLS connections.",
       "type": "Optional[String[1]]"
     },
-    "discovery-token-ca-cert-hash": {
+    "discovery_token_ca_cert_hash": {
       "description": "The CA key hash is used to verify the full root CA certificate discovered during token-based bootstrapping. It has the format sha256:<hex_encoded_hash>. By default, the hash value is returned in the kubernetes join command printed at the end of kubernetes init. It is in a standard format (see RFC7469) and can also be calculated by 3rd party tools or provisioning systems.",
-      "type": "Optional[String[1]]"
+      "type": "String[1]"
     },
-    "discovery-token-unsafe-skip-ca-verification": {
+    "discovery_token_unsafe_skip_ca_verification": {
       "description": "Disable the warning/error that occurs when --discovery-token-ca-cert-hash is not provided.",
-      "type": "Optional[Boolean[1]]"
+      "type": "Optional[Boolean]"
     },
     "node_name": {
       "description": "Specify the Node name. The default is to use the OS hostname. This is useful on some cloud providers such as AWS. This name is also added to the node’s TLS certificate.",
@@ -33,11 +33,11 @@
     },
     "token": {
       "description": "Often times the same token is used for both --discovery-token and --tls-bootstrap-token. This option specifies the same token for both. Other flags override this flag if present.",
-      "type": "Optional[String[1]]"
+      "type": "String[1]"
     },
     "skip_preflight_checks": {
       "description": "By default, kubernetes runs a series of preflight checks to validate the system before making any changes. Advanced users can use this flag to bypass these if necessary.",
-      "type": "Optional[Boolean[1]]"
+      "type": "Optional[Boolean]"
     }
   }
 }

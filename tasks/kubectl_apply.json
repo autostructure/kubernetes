@@ -1,43 +1,102 @@
-
 {
-  "description": "Joins a kubernetes cluster",
+  "description": "Apply kubernetes configuration",
   "input_method": "stdin",
   "parameters": {
-    "api_versions": {
-      "description": "List the API versions that are available.",
+    "all": {
+      "description": "Select all resources in the namespace of the specified resource types.",
+      "type": "Optional[Boolean]"
+    },
+    "allow_missing_template_keys": {
+      "description": "If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.",
+      "type": "Optional[Boolean]"
+    },
+    "cascade": {
+      "description": "Only relevant during a prune or a force apply. If true, cascade the deletion of the resources managed by pruned or deleted resources (e.g. Pods created by a ReplicationController).",
+      "type": "Optional[Boolean]"
+    },
+    "dry_run": {
+      "description": "If true, only print the object that would be sent, without sending it.",
+      "type": "Optional[Boolean]"
+    },
+    "filename": {
+      "description": "Filename, directory, or URL to files that contains the configuration to apply",
+      "type": "Variant[String[1], Array[String[1]]"
+    },
+    "force": {
+      "description": "Delete and re-create the specified resource, when PATCH encounters conflict and has retried for 5 times.",
+      "type": "Optional[Boolean]"
+    },
+    "grace_period": {
+      "description": "Only relevant during a prune or a force apply. Period of time in seconds given to pruned or deleted resources to terminate gracefully. Ignored if negative.",
+      "type": "Optional[Integer]"
+    },
+    "include_extended_apis": {
+      "description": "If true, include definitions of new APIs via calls to the API server.",
+      "type": "Optional[Boolean]"
+    },
+    "include_uninitialized": {
+      "description": "If true, the kubectl command applies to uninitialized objects. If explicitly set to false, this flag overrides other flags that make the kubectl commands apply to uninitialized objects, e.g., \"--all\".",
+      "type": "Optional[Boolean]"
+    },
+    "no_headers": {
+      "description": "When using the default or custom-column output format, don't print headers (default print headers).",
+      "type": "Optional[Boolean]"
+    },
+    "openapi_validation": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "output": {
+      "description": "kubernetes specific config file.",
       "type": "Optional[String[1]]"
     },
-    "apply": {
-      "description": "Apply a configuration change to a resource from a file or stdin.",
+    "overwrite": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "prune": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "prune_whitelist": {
+      "description": "kubernetes specific config file.",
       "type": "Optional[String[1]]"
     },
-    "discovery-token": {
-      "description": "The discovery token is used along with the address of the API server (as an unnamed argument) to download and verify information about the cluster. The most critical part of the cluster information is the root CA bundle used to verify the identity of the server during subsequent TLS connections.",
+    "record": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "recursive": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "selector": {
+      "description": "kubernetes specific config file.",
       "type": "Optional[String[1]]"
     },
-    "discovery-token-ca-cert-hash": {
-      "description": "The CA key hash is used to verify the full root CA certificate discovered during token-based bootstrapping. It has the format sha256:<hex_encoded_hash>. By default, the hash value is returned in the kubernetes join command printed at the end of kubernetes init. It is in a standard format (see RFC7469) and can also be calculated by 3rd party tools or provisioning systems.",
+    "show_all": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "show_labels": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
+    },
+    "sort_by": {
+      "description": "kubernetes specific config file.",
       "type": "Optional[String[1]]"
     },
-    "discovery-token-unsafe-skip-ca-verification": {
-      "description": "Disable the warning/error that occurs when --discovery-token-ca-cert-hash is not provided.",
-      "type": "Optional[Boolean[1]]"
-    },
-    "node_name": {
-      "description": "Specify the Node name. The default is to use the OS hostname. This is useful on some cloud providers such as AWS. This name is also added to the node’s TLS certificate.",
+    "template": {
+      "description": "kubernetes specific config file.",
       "type": "Optional[String[1]]"
     },
-    "tls_bootstrap_token": {
-      "description": "The token used to authenticate to the API server for the purposes of TLS bootstrapping.",
-      "type": "Optional[String[1]]"
+    "timeout": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Integer]"
     },
-    "token": {
-      "description": "Often times the same token is used for both --discovery-token and --tls-bootstrap-token. This option specifies the same token for both. Other flags override this flag if present.",
-      "type": "Optional[String[1]]"
-    },
-    "skip_preflight_checks": {
-      "description": "By default, kubernetes runs a series of preflight checks to validate the system before making any changes. Advanced users can use this flag to bypass these if necessary.",
-      "type": "Optional[Boolean[1]]"
+    "validate": {
+      "description": "kubernetes specific config file.",
+      "type": "Optional[Boolean]"
     }
   }
 }

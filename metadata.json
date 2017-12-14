@@ -7,10 +7,32 @@
   "source": "https://github.com/autostructure/kubernetes.git",
   "project_page": "https://github.com/autostructure/kubernetes",
   "issues_url": "https://github.com/autostructure/kubernetes/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
   "dependencies": [
     {
       "name": "herculesteam-augeasproviders_sysctl",
       "version_requirement": ">= 2.0.0 < 3.0.0"
+    },
+    {
+      "name": "puppetlabs-docker",
+      "version_requirement": ">= 1.0.0 < 2.0.0"
+    },
+    {
+      "name": "puppetlabs-firewall",
+      "version_requirement": ">= 1.0.0 < 2.0.0"
     },
     {
       "name": "puppet-selinux",

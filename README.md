@@ -25,23 +25,76 @@ This module installs, configures, and manages Kubernetes.
 
 ### Setup Requirements
 
-Docker must be installed.
+Install ruby and bolt to use all of the functionality of this module.
 
-You can use the Puppet supported Docker module to install the basic Docker container engine.
+#### Install ruby
+
+You need to have ruby installed locally. If you are unfamiliar with ruby follow these instructions to install it on your machine. https://www.ruby-lang.org/en/documentation/installation/
+
+#### Install bolt and puppet
+
+In order to execute the tasks and plans of this module you will need puppet and bolt. Go ahead and install them.
 
 ```puppet
-include ::docker
+gem install puppet --no-ri --no-rdoc
+gem install bolt --no-ri --no-rdoc
 ```
 
-### Beginning with kubernetes
+## Usage
 
-To install kubeadm and the necessary kube packages add a single class to the manifest file:
+### Using Puppet Enterprise
+
+If you are using Puppet Enterprise kubeadm can be installed by calling the main class.
+
+To install kubernetes add a single class to the manifest file:
 
 ```puppet
 include ::kubernetes
 ```
 
-## Usage
+You also need to include docker. Docker must be assigned to the cgroupfs cgroupdriver. Turn off the firewall.
+
+Both modules are required for the kubernetes module. The following snippet sets the minimal requirements for kubernetes.
+
+```puppet
+class { '::firewall':
+  ensure => stopped,
+}
+
+class { '::docker':
+  extra_parameters => ['--exec-opt native.cgroupdriver=cgroupfs'],
+}
+```
+
+#### Using a username and password
+
+```bolt
+bolt plan run kubernetes::install_cluster --params '{ "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k
+```
+
+#### Using a username private key
+
+```bolt
+bolt plan run kubernetes::install_cluster --params '{ "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k
+```
+
+### Fresh Install without Puppet Enterprise
+
+If kubeadm is not installed on your servers run one of the following commands to install your kubernetes cluster.
+
+The user you use must have the ability to run sudo.
+
+#### Using a username and password
+
+```bolt
+bolt plan run kubernetes::install_cluster --params '{ "install_kubeadm": true, "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k --sudo
+```
+
+#### Using a username private key
+
+```bolt
+bolt plan run kubernetes::install_cluster --params '{ "install_kubeadm": true, "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k
+```
 
 ## Reference
 

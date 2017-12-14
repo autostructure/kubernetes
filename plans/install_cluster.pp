@@ -1,19 +1,69 @@
 plan kubernetes::install_cluster(
-  Variant[String[1], Array[String[1]]  $kubectl_users,
-  Variant[String[1], Array[String[1]]  $masters,
-  Variant[String[1], Array[String[1]]  $nodes,
+  Boolean $install_kubeadm = false,
+  String[1] $master,
+  Array[String[1]] $worker_nodes,
 ) {
-# (
-#   String[1]                            $load_balancer,
-#   Variant[String[1], Array[String[1]]  $frontends,
-#   Variant[String[1], Array[String[1]]  $backends,
-# ) {
-#
-#   # process frontends
-#   run_task('mymodule::lb_remove', $load_balancer, frontends => $frontends)
-#   run_task('mymodule::update_frontend_app', $frontends, version => '1.2.3')
-#   run_task('mymodule::lb_add', $load_balancer, frontends => $frontends)
+  if($install_kubeadm) {
+    # Install puppet and kubeadm_init
+    notice "Installing kubeadm on master ${master}."
 
-  $join_values = run_task('kubernetes::kubeadm_init', $masters)
-  $values2 = run_task('kubernetes::tester_reader', $master) # , major => $values['major'], minor => $values['minor'])
+    $kubeadm_master_install_results = run_script('kubernetes/install_kubeadm.sh', $master)
+
+    $kubeadm_master_install_results.each |$node, $result| {
+      case $result {
+        'Error' : {
+          notice("${node} errored with message ${result.message}")
+        }
+        default: {
+          notice "Kubeadm install complete on master ${node}."
+        }
+      }
+    }
+
+    notice "Installing kubeadm on nodes ${worker_nodes}."
+
+    $kubeadm_nodes_install_results = run_script('kubernetes/install_kubeadm.sh', $worker_nodes)
+
+    $kubeadm_nodes_install_results.each |$node, $result| {
+      case $result {
+        'Error' : {
+          notice("${node} errored with message ${result.message}")
+        }
+        default: {
+          notice "Kubeadm install complete on node ${node}."
+        }
+      }
+    }
+  }
+
+  # Initialize the master
+  $kubeadm_init_results = run_task('kubernetes::kubeadm_init', $master,
+                                    { pod_network_cidr => '10.244.0.0/16', skip_preflight_checks => true } )
+
+  $kubeadm_init_results.each |$node, $result| {
+    case $result {
+      'Error' : {
+        notice("${node} errored with message ${result.message}")
+      }
+      default: {
+        notice "Kubeadm initialization complete on master ${node}."
+      }
+    }
+  }
+
+  $token = $kubeadm_init_results[$master]['token']
+  $discovery_token_ca_cert_hash = $kubeadm_init_results[$master]['discovery-token-ca-cert-hash']
+
+
+  notice('Record these values. They are required to join future nodes to the cluster.')
+  notice("Token: ${token}")
+  notice("Discovery Token CA Cert Hash. ${discovery_token_ca_cert_hash}")
+
+  # Install flannel
+  # run_task('kubernetes::kubectl_apply', $master, { filename => 'https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml' })
+  run_script('kubernetes/install_flannel_network.sh', $master)
+
+  # Join the nodes
+  run_task('kubernetes::kubeadm_join', $worker_nodes,
+            { token => $token, discovery_token_ca_cert_hash => $discovery_token_ca_cert_hash })
 }

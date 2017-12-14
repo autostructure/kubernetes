@@ -12,6 +12,14 @@ describe 'kubernetes class' do
           "exec-opts": ["native.cgroupdriver=systemd"]
       }
       END
+      class { '::firewall':
+        ensure => stopped,
+      }
+
+      class { '::docker':
+        extra_parameters => ['--exec-opt native.cgroupdriver=cgroupfs'],
+      }
+
       accounts::user { 'bryanbelanger':
         group    => 'wheel',
         shell    => '/bin/bash',
@@ -26,19 +34,6 @@ describe 'kubernetes class' do
       -> sudo::conf { 'bryanbelanger':
         priority => 60,
         content  => "bryanbelanger ALL=(ALL) NOPASSWD:ALL",
-      }
-      -> class { 'firewall':
-        ensure => stopped,
-      }
-      -> class { 'docker': }
-      # 3.17 Verify that daemon.json file ownership is set to root:root
-      # 3.18 Verify that daemon.json file permissions are set to 644 or more restrictive
-      -> file { '/etc/docker/daemon.json':
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => 'a-x,go-w',
-        content => $daemon_json,
       }
       -> class { 'kubernetes': }
       kubernetes
