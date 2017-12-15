@@ -20,7 +20,7 @@
     },
     "filename": {
       "description": "Filename, directory, or URL to files that contains the configuration to apply",
-      "type": "Variant[String[1], Array[String[1]]"
+      "type": "String[1]"
     },
     "force": {
       "description": "Delete and re-create the specified resource, when PATCH encounters conflict and has retried for 5 times.",

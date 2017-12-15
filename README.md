@@ -33,11 +33,16 @@ You need to have ruby installed locally. If you are unfamiliar with ruby follow 
 
 #### Install bolt and puppet
 
-In order to execute the tasks and plans of this module you will need puppet and bolt. Go ahead and install them.
+In order to execute the tasks and plans of this module you will need puppet and bolt.
+
+You also need to download the module locally.
+
+Go ahead and install them.
 
 ```puppet
 gem install puppet --no-ri --no-rdoc
 gem install bolt --no-ri --no-rdoc
+puppet module install autostructure-kubernetes
 ```
 
 ## Usage

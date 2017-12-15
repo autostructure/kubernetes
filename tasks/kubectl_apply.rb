@@ -8,12 +8,11 @@ require 'puppet'
 def kubectl_apply(all, allow_missing_template_keys, cascade, dry_run, filename, force, grace_period, include_extended_apis,
                   include_uninitialized, no_headers, openapi_validation, output, overwrite, prune, prune_whitelist, record, recursive,
                   selector, show_all, show_labels, sort_by, template, timeout, validate)
-  cmd_string = "kubectl apply"
+  cmd_string = "kubectl apply --filename=#{filename}"
   cmd_string << " --all=#{all}" unless all.nil?
   cmd_string << " --allow-missing-template-keys=#{allow_missing_template_keys}" unless allow_missing_template_keys.nil?
   cmd_string << " --cascade=#{cascade}" unless cascade.nil?
   cmd_string << " --dry-run=#{dry_run}" unless dry_run.nil?
-  cmd_string << " --filename=#{filename}" unless filename.nil?
   cmd_string << " --force=#{force}" unless force.nil?
   cmd_string << " --grace_period=#{grace_period}" unless grace_period.nil?
   cmd_string << " --include_extended_apis=#{include_extended_apis}" unless include_extended_apis.nil?
