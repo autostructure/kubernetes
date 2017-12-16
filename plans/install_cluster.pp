@@ -1,9 +1,12 @@
 plan kubernetes::install_cluster(
   Boolean $install_kubeadm = false,
   String[1] $master,
-  Array[String[1]] $worker_nodes,
+  String[1] $worker_nodes,
 ) {
   if($install_kubeadm) {
+    # Worker nodes array
+    $worker_nodes_array = split($worker_nodes, ',')
+
     # Install puppet and kubeadm_init
     notice "Installing kubeadm on master ${master}."
 
@@ -22,7 +25,7 @@ plan kubernetes::install_cluster(
 
     notice "Installing kubeadm on nodes ${worker_nodes}."
 
-    $kubeadm_nodes_install_results = run_script('kubernetes/install_kubeadm.sh', $worker_nodes)
+    $kubeadm_nodes_install_results = run_script('kubernetes/install_kubeadm.sh', $worker_nodes_array)
 
     $kubeadm_nodes_install_results.each |$node, $result| {
       case $result {
@@ -64,6 +67,6 @@ plan kubernetes::install_cluster(
   run_script('kubernetes/install_flannel_network.sh', $master)
 
   # Join the nodes
-  run_task('kubernetes::kubeadm_join', $worker_nodes,
+  run_task('kubernetes::kubeadm_join', $worker_nodes_array,
             { token => $token, discovery_token_ca_cert_hash => $discovery_token_ca_cert_hash })
 }

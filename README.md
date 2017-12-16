@@ -47,6 +47,10 @@ puppet module install autostructure-kubernetes
 
 ## Usage
 
+If you have already installed the module with Puppet Enterprise go to [Using Puppet Enterprise.](#using_puppet_enterprise)
+
+If you are doing an install on fresh boxes go to [Fresh Install without Puppet Enterprise.](#fresh_install_without_puppet_enterprise)
+
 ### Using Puppet Enterprise
 
 If you are using Puppet Enterprise kubeadm can be installed by calling the main class.
@@ -74,13 +78,13 @@ class { '::docker':
 #### Using a username and password
 
 ```bolt
-bolt plan run kubernetes::install_cluster --params '{ "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k --sudo
 ```
 
 #### Using a username private key
 
 ```bolt
-bolt plan run kubernetes::install_cluster --params '{ "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k --sudo
 ```
 
 ### Fresh Install without Puppet Enterprise
@@ -92,13 +96,13 @@ The user you use must have the ability to run sudo.
 #### Using a username and password
 
 ```bolt
-bolt plan run kubernetes::install_cluster --params '{ "install_kubeadm": true, "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k --sudo
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k --sudo
 ```
 
 #### Using a username private key
 
 ```bolt
-bolt plan run kubernetes::install_cluster --params '{ "install_kubeadm": true, "worker_nodes": ["<host_or_ip>" , "<host_or_ip>"], "master": "<host_or_ip>" }' --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k --sudo
 ```
 
 ## Reference
