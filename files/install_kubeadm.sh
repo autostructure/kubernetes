@@ -5,7 +5,7 @@ rpm -Uvh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
 yum install -y puppet-agent-5.3.3
 
 /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-docker --version 1.0.2
-/opt/puppetlabs/puppet/bin/puppet module install autostructure-kubernetes --version 0.1.4
+/opt/puppetlabs/puppet/bin/puppet module install autostructure-kubernetes
 /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-firewall --version 1.11.0
 /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-accounts --version 1.2.1
 
