@@ -78,13 +78,13 @@ class { '::docker':
 #### Using a username and password
 
 ```bolt
-bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k --sudo
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --password <sudo_user_password>  --modulepath ~/.puppetlabs/etc/code/modules -k --sudo
 ```
 
 #### Using a username private key
 
 ```bolt
-bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k --sudo
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --private-key <path_to_private_key>  --modulepath ~/.puppetlabs/etc/code/modules -k --sudo
 ```
 
 ### Fresh Install without Puppet Enterprise
@@ -96,13 +96,13 @@ The user you use must have the ability to run sudo.
 #### Using a username and password
 
 ```bolt
-bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --password <sudo_user_password>  --modulepath puppet/modules/ -k --sudo
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --password <sudo_user_password>  --modulepath ~/.puppetlabs/etc/code/modules -k --sudo
 ```
 
 #### Using a username private key
 
 ```bolt
-bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --private-key <path_to_private_key>  --modulepath puppet/modules/ -k --sudo
+bolt plan run kubernetes::install_cluster master=<master_host_or_ip> worker_nodes=<worker1_host_or_ip>,<worker2__or_ip_2>,... --user <sudo_user> --private-key <path_to_private_key>  --modulepath ~/.puppetlabs/etc/code/modules -k --sudo
 ```
 
 ## Reference

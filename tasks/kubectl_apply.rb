@@ -33,7 +33,7 @@ def kubectl_apply(all, allow_missing_template_keys, cascade, dry_run, filename, 
   cmd_string << " --timeout=#{timeout}" unless timeout.nil?
   cmd_string << " --validate=#{validate}" unless validate.nil?
 
-  stdout, stderr, status = Open3.capture3(cmd_string)
+  stdout, stderr, status = Open3.capture3({"KUBECONFIG" => "/etc/kubernetes/admin.conf"}, cmd_string)
   raise Puppet::Error, "stderr: '#{stderr}'" if status != 0
   stdout.strip
 end
