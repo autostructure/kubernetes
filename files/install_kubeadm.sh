@@ -17,16 +17,10 @@ class { '::firewall':
 }
 
 class { '::docker':
-  extra_parameters => ['--exec-opt native.cgroupdriver=systemd'],
+  extra_parameters => ['--exec-opt native.cgroupdriver=cgroupfs'],
 }
 
-accounts::user { 'bryanbelanger':
-  group   => 'wheel',
-  shell   => '/bin/bash',
-  locked  => false,
-  sshkeys => ['ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdqCg4nG5zsz9eg/DEkE9sHiwr6r6N3oXFcNONBzQJjm0Hf8IfbH7xuNLCKWI8peUXeBawCrUoIrSf+PEkk/QHUN3Az6wlyfWJTxKBSnFBZeThn88PBW1kgh0z0t/rP1+PK9UeQ2iP+xko8hTpGDPCfiAwJPzNlf+yBB87BpoZpKjeXjk+BVH4n+BhV3nDAMRRPeTXU02OUetyNFHe2DcndMFHQmH/7/UiPGjdnYIEv5n9afa1L3G0uHfz2vnrmNfMkBjbe0+h8zKMvhBjpEUwlR4yFlgB84iwdRvDrAfZPlPpik5Ly40X4keSfh8gjahH4ns8XN6ujTptFNCWc5Wz bryanbelanger@Bryans-MacBook-Pro.local'],
-}
--> class { '::kubernetes': }
+class { '::kubernetes': }
 MANIFEST
 ) > /tmp/manifest.pp
 

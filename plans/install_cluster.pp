@@ -31,9 +31,9 @@ plan kubernetes::install_cluster(
     }
 
     notice "Installing kubeadm on nodes ${worker_nodes}."
-#
+
     $kubeadm_nodes_install_results = run_script('kubernetes/install_kubeadm.sh', $worker_nodes_array)
-#
+
     $kubeadm_nodes_install_results.each |$node, $result| {
       case $result {
         Error : {
@@ -48,7 +48,10 @@ plan kubernetes::install_cluster(
 
   # Initialize the master
   $kubeadm_init_results = run_task('kubernetes::kubeadm_init', $master,
-                                    { pod_network_cidr => '10.244.0.0/16', skip_preflight_checks => true } )
+                                    { pod_network_cidr => '10.244.0.0/16', skip_preflight_checks => 'true' } )
+
+  notice $kubeadm_init_results
+
   $kubeadm_init_results.each |$node, $result| {
     case $result {
       Error : {

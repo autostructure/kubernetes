@@ -31,6 +31,10 @@
       "description": "Set of key=value pairs that describe feature gates for alpha/experimental features.",
       "type": "Optional[String[1]]"
     },
+    "ignore_preflight_errors": {
+      "description": "Bypass preflight checks.",
+      "type": "Optional[String[1]]"
+    },
     "kubernetes_version": {
       "description": "Kubernetes version to initialise",
       "type": "Optional[String[1]]"
@@ -53,7 +57,7 @@
     },
     "skip_preflight_checks": {
       "description": "Bypass preflight checks.",
-      "type": "Optional[Boolean]"
+      "type": "Optional[String[1]]"
     },
     "skip_token_print": {
       "description": "Bypass token print.",
