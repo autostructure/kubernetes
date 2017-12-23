@@ -6,7 +6,7 @@ class kubernetes::pre_install {
     }
 
     reboot { 'after_run':
-      subscribe  => Exec['change-selinux-status-to-disabled'],
+      subscribe  => Class['Selinux::Config'],
     }
 
     # Make sure swap is off
