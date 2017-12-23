@@ -9,10 +9,11 @@ plan kubernetes::install_cluster(
   # $install_heapster_bol = str2bool($install_heapster)
   # $install_dashboard_bol = str2bool($install_dashboard)
 
+  # Worker nodes array
+  $worker_nodes_array = split($worker_nodes, ',')
 
-  if $install_kubeadm {
-    # Worker nodes array
-    $worker_nodes_array = split($worker_nodes, ',')
+
+  if $install_kubeadm == 'true' {
 
     # Install puppet and kubeadm_init
     notice("Installing kubeadm on master ${master}.")
@@ -103,7 +104,7 @@ plan kubernetes::install_cluster(
     }
   }
 
-  if $install_heapster {
+  if $install_heapster == 'true' {
     run_task('kubernetes::kubectl_apply', $master,
       { filename => 'https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/grafana.yaml' })
 
@@ -117,7 +118,7 @@ plan kubernetes::install_cluster(
       { filename => 'https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml' })
   }
 
-  if $install_dashboard {
+  if $install_dashboard == 'true' {
     $kubectl_dashboard_results = run_task('kubernetes::kubectl_apply', $master,
                                 { filename => 'https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml' })
 

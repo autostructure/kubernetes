@@ -6,3 +6,6 @@
 
 2017-12-23 Release 0.1.14
   - Apply reboot when finished.
+
+2017-12-23 Release 0.1.15
+  - Fix multiple plan problems.
