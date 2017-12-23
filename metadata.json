@@ -1,6 +1,6 @@
 {
   "name": "autostructure-kubernetes",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "author": "autostructure",
   "summary": "Installs a kubernetes master or kubernetes node.",
   "license": "Apache-2.0",
