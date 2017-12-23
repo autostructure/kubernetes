@@ -6,7 +6,8 @@ class kubernetes::pre_install {
     }
 
     reboot { 'after_run':
-      subscribe  => Class['Selinux::Config'],
+      apply     => 'finished',
+      subscribe => Class['Selinux::Config'],
     }
 
     # Make sure swap is off
