@@ -1,0 +1,2 @@
+2017-12-23 Release 0.1.12
+  - Ensure kubernetes service files have exectuable bits removed

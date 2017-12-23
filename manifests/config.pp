@@ -20,4 +20,14 @@ class kubernetes::config {
     ensure  => file,
     content => $kubelet_cgroup_file,
   }
+
+  file { '/etc/systemd/system/kubelet.service':
+    ensure => file,
+    mode   => 'a-x',
+  }
+
+  file { '/etc/systemd/system/kubelet.service.d/10-kubeadm.conf':
+    ensure => file,
+    mode   => 'a-x',
+  }
 }
