@@ -8,14 +8,14 @@ require 'puppet'
 def kubeadm_join(config, discovery_file, discovery_token, discovery_token_ca_cert_hash, discovery_token_unsafe_skip_ca_verification,
                  node_name, tls_bootstrap_token, token, skip_preflight_checks)
   cmd_string = "kubeadm join"
-  cmd_string << " --config=#{config}" unless config.nil?
-  cmd_string << " --discovery-file=#{discovery_file}" unless discovery_file.nil?
-  cmd_string << " --discovery-token=#{discovery_token}" unless discovery_token.nil?
-  cmd_string << " --discovery-token-ca-cert-hash=#{discovery_token_ca_cert_hash}" unless discovery_token_ca_cert_hash.nil?
+  cmd_string << " --config #{config}" unless config.nil?
+  cmd_string << " --discovery-file #{discovery_file}" unless discovery_file.nil?
+  cmd_string << " --discovery-token #{discovery_token}" unless discovery_token.nil?
+  cmd_string << " --discovery-token-ca-cert-hash #{discovery_token_ca_cert_hash}" unless discovery_token_ca_cert_hash.nil?
   cmd_string << " --discovery-token-unsafe-skip-ca-verification" unless discovery_token_unsafe_skip_ca_verification.nil?
   cmd_string << " --node-name=#{node_name}" unless node_name.nil?
-  cmd_string << " --tls-bootstrap-token=#{tls_bootstrap_token}" unless tls_bootstrap_token.nil?
-  cmd_string << " --token=#{token}" unless token.nil?
+  cmd_string << " --tls-bootstrap-token #{tls_bootstrap_token}" unless tls_bootstrap_token.nil?
+  cmd_string << " --token #{token}" unless token.nil?
   cmd_string << " --skip-preflight-checks" unless skip_preflight_checks.nil?
 
   stdout, stderr, status = Open3.capture3(cmd_string)
