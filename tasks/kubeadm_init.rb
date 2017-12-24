@@ -58,8 +58,8 @@ begin
 
   join_values =
     {
-      "discovery-token-ca-cert-hash": /sha256:\S+/.match(result),
-      "token": /--token +(?<token>\S+ +\S+)/.match(result)[:token]
+      "discovery-token-ca-cert-hash" => /sha256:\S+/.match(result),
+      "token" => /--token +(?<token>\S+ +\S+)/.match(result)[:token]
     }
 
   puts JSON.pretty_generate(join_values)
